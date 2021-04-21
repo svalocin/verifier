@@ -1,0 +1,76 @@
+package verifier
+
+import (
+	"fmt"
+
+	"github.com/cheekybits/genny/generic"
+)
+
+type Number generic.Type
+
+type NumberVerifier struct {
+}
+
+func (vr NumberVerifier) Less(v Number, n Number, msg string) error {
+	return Verify(func() bool { return v < n }, msg)
+}
+
+func (vr NumberVerifier) LessN(v Number, n Number, name string) error {
+	return vr.Less(v, n, fmt.Sprintf(MessageLess, name, n))
+}
+
+func (vr NumberVerifier) LessP(v Number, n Number, msg string) {
+	errorToPanic(vr.Less(v, n, msg))
+}
+
+func (vr NumberVerifier) LessNP(v Number, n Number, name string) {
+	errorToPanic(vr.LessN(v, n, name))
+}
+
+func (vr NumberVerifier) LessAndEqual(v Number, n Number, msg string) error {
+	return Verify(func() bool { return v <= n }, msg)
+}
+
+func (vr NumberVerifier) LessAndEqualN(v Number, n Number, name string) error {
+	return vr.LessAndEqual(v, n, fmt.Sprintf(MessageLessAndEqual, name, n))
+}
+
+func (vr NumberVerifier) LessAndEqualP(v Number, n Number, msg string) {
+	errorToPanic(vr.LessAndEqual(v, n, msg))
+}
+
+func (vr NumberVerifier) LessAndEqualNP(v Number, n Number, name string) {
+	errorToPanic(vr.LessAndEqualN(v, n, name))
+}
+
+func (vr NumberVerifier) Greater(v Number, n Number, msg string) error {
+	return Verify(func() bool { return v > n }, msg)
+}
+
+func (vr NumberVerifier) GreaterN(v Number, n Number, name string) error {
+	return vr.Greater(v, n, fmt.Sprintf(MessageGreater, name, n))
+}
+
+func (vr NumberVerifier) GreaterP(v Number, n Number, msg string) {
+	errorToPanic(vr.Greater(v, n, msg))
+}
+
+func (vr NumberVerifier) GreaterNP(v Number, n Number, name string) {
+	errorToPanic(vr.GreaterN(v, n, name))
+}
+
+func (vr NumberVerifier) GreaterAndEqual(v Number, n Number, msg string) error {
+	return Verify(func() bool { return v >= n }, msg)
+}
+
+func (vr NumberVerifier) GreaterAndEqualN(v Number, n Number, name string) error {
+	return vr.GreaterAndEqual(v, n, fmt.Sprintf(MessageGreaterAndEqual, name, n))
+}
+
+func (vr NumberVerifier) GreaterAndEqualP(v Number, n Number, msg string) {
+	errorToPanic(vr.GreaterAndEqual(v, n, msg))
+}
+
+func (vr NumberVerifier) GreaterAndEqualNP(v Number, n Number, name string) {
+	errorToPanic(vr.GreaterAndEqualN(v, n, name))
+}
